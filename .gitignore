@@ -1,6 +1,6 @@
 # Custom
 # don't track the temp folder for zip archive creation
-/tmp/*
+**/tmp/*
 
 # General
 .DS_Store
