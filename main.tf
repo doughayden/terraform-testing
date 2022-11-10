@@ -1,9 +1,10 @@
 module "storage" {
-  source      = "./modules/storage"
-  project     = local.project
-  region      = local.region
-  labels      = local.labels
-  name_prefix = local.name_prefix
+  source          = "./modules/storage"
+  project         = local.project
+  region          = local.region
+  labels          = local.labels
+  name_prefix     = local.name_prefix
+  artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
 }
 
 module "cloud_function" {
@@ -12,5 +13,6 @@ module "cloud_function" {
   region          = local.region
   labels          = local.labels
   name_prefix     = local.name_prefix
-  artifact_bucket = "${local.bucket_prefix}-artifact"
+  artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
+  depends_on      = [module.storage]
 }
