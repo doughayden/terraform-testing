@@ -59,3 +59,9 @@ resource "google_cloudfunctions_function" "test2" {
   entry_point           = "not_a_real_function"
   trigger_http          = true
 }
+
+###
+#
+# Here's some added comments to test if this breaks existing resources.
+#
+###
