@@ -1,3 +1,9 @@
+variable "project" {
+  type        = string
+  description = "The deployment project"
+  default     = ""
+}
+
 variable "environment" {
   type        = string
   description = "The deployment environment."

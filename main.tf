@@ -1,6 +1,6 @@
 module "storage" {
   source          = "./modules/storage"
-  project         = local.project
+  project         = var.project
   region          = local.region
   labels          = local.labels
   name_prefix     = local.name_prefix

@@ -1,5 +1,5 @@
 locals {
-  project = "doug-hayden-eng-sandbox"
+  project = var.project
   region  = "us-central1"
   zone    = "us-central1-a"
   labels = {
