@@ -36,3 +36,4 @@ steps:
   args:
   - '-c'
   - terraform plan -lock=false -var 'environment=test' -no-color
+  
