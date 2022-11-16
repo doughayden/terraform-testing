@@ -5,6 +5,8 @@ module "storage" {
   labels          = local.labels
   name_prefix     = local.name_prefix
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
+  environment     = var.environment
+  looker_clients  = var.looker_clients
 }
 
 module "cloud_function" {
@@ -14,5 +16,14 @@ module "cloud_function" {
   labels          = local.labels
   name_prefix     = local.name_prefix
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
-  depends_on      = [module.storage]
+  #depends_on      = [module.storage]
+}
+
+module "service-accounts" {
+  source         = "./modules/service-accounts"
+  project        = local.project
+  region         = local.region
+  labels         = local.labels
+  environment    = var.environment
+  looker_clients = var.looker_clients
 }

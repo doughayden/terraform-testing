@@ -12,3 +12,10 @@ variable "environment" {
     error_message = "The environment string value must be 'test', 'dev', or 'prod'."
   }
 }
+
+# Added to test for SR
+
+variable "looker_clients" {
+  type        = list(string)
+  description = "new clients for project"
+}
