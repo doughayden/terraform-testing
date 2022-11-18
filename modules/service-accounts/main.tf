@@ -1,9 +1,9 @@
 locals {
   bucket_s_accounts = flatten([
-    for bucket in values(var.gcs_buckets_map) : [
-      for email in values(var.sa_looker_email_map) : {
-        bucket = bucket
-        email  = email
+    for bucket_client in var.looker_clients : [
+      for sa_client in var.looker_clients : {
+        bucket_client = bucket_client
+        sa_client     = sa_client
       }
     ]
   ])
@@ -19,20 +19,10 @@ resource "google_service_account" "sa-looker" {
 
 resource "google_storage_bucket_iam_member" "gcs-looker-bucket-owner" {
   for_each = {
-    for entry in local.bucket_s_accounts : "${entry.bucket}.${entry.email}" => entry
+    for entry in local.bucket_s_accounts : "${entry.bucket_client}.${entry.sa_client}" => entry
   }
-  bucket = each.value.bucket
-  role   = "roles/storage.legacyBucketOwner"
-  member = "serviceAccount:${each.value.email}"
+  bucket     = "${each.value.bucket_client}-${var.environment}-${var.project}"
+  role       = "roles/storage.legacyBucketOwner"
+  member     = "serviceAccount:sa-looker-${each.value.sa_client}@${var.project}.iam.gserviceaccount.com"
+  depends_on = [google_service_account.sa-looker]
 }
-
-# This also works
-
-# resource "google_storage_bucket_iam_binding" "gcs-looker-bucket-owner" {
-#   for_each = { for entry in local.bucket_s_accounts : "${entry.bucket}.${entry.email}" => entry }
-#   bucket   = each.value.bucket
-#   role     = "roles/storage.legacyBucketOwner"
-#   members = [
-#     "serviceAccount:${each.value.email}",
-#   ]
-# }
