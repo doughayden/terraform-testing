@@ -27,6 +27,14 @@ resource "google_storage_bucket" "gcs_buckets" {
   }
 }
 
+resource "google_storage_bucket_iam_member" "gcs-looker-bucket-owner" {
+  for_each = toset(var.looker_clients)
+  bucket   = "${each.value}-${var.environment}-${var.project}"
+  role     = "roles/storage.legacyBucketOwner"
+  member   = "serviceAccount:sa-looker-${each.value}@${var.project}.iam.gserviceaccount.com"
+  # depends_on = [google_storage_bucket.gcs_buckets] # Hasicorp recommends against using `depends_on` if possible
+}
+
 # SR existing config, does not work unles IAM member and SA are both defined here.
 
 # resource "google_storage_bucket_iam_member" "gcs-looker-bucket-owner" {
