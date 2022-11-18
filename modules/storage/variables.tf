@@ -10,22 +10,10 @@ variable "region" {
   default     = ""
 }
 
-variable "zone" {
-  type        = string
-  description = "Google Cloud Platform Zone Name."
-  default     = ""
-}
-
 variable "labels" {
   type        = map(string)
   description = "Map of labels."
   default     = {}
-}
-
-variable "name_prefix" {
-  type        = string
-  description = "Name prefix."
-  default     = ""
 }
 
 variable "artifact_bucket" {
@@ -51,3 +39,13 @@ variable "environment" {
   type        = string
   description = "The deployment environment."
 }
+
+# variable "gcs_buckets_map" {
+#   type = map(string)
+#   description = "List of GCS buckets."
+# }
+
+# variable "sa_looker_map" {
+#   type = map(string)
+#   description = "Map of Looker Service Accounts."
+# }

@@ -1,0 +1,5 @@
+bucket = "doug-sandbox-tf-state"
+prefix = "terraform/state"
+
+# to use this when backend.tf does not specify a GCS bucket and prefix:
+# terraform init -backend-config=test.tfbackend

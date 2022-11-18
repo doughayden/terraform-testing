@@ -3,10 +3,11 @@ module "storage" {
   project         = var.project
   region          = local.region
   labels          = local.labels
-  name_prefix     = local.name_prefix
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
   environment     = var.environment
   looker_clients  = var.looker_clients
+  # sa_looker_map   = module.service-accounts.sa_looker_out
+  # gcs_buckets_map = module.storage.gcs_buckets_out
 }
 
 module "cloud_function" {
@@ -16,14 +17,15 @@ module "cloud_function" {
   labels          = local.labels
   name_prefix     = local.name_prefix
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
-  #depends_on      = [module.storage]
+  # depends_on      = [module.storage]
 }
 
+# Added to test for SR
+
 module "service-accounts" {
-  source         = "./modules/service-accounts"
-  project        = local.project
-  region         = local.region
-  labels         = local.labels
-  environment    = var.environment
-  looker_clients = var.looker_clients
+  source              = "./modules/service-accounts"
+  project             = local.project
+  looker_clients      = var.looker_clients
+  gcs_buckets_map     = module.storage.gcs_buckets_out # takes output from the srorage module to pass as a variable to the service-accounts module
+  sa_looker_email_map = module.service-accounts.sa_looker_email_out
 }
