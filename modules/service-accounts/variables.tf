@@ -10,11 +10,11 @@ variable "looker_clients" {
 }
 
 variable "gcs_buckets_map" {
-  type = map(string)
+  type        = map(string)
   description = "List of GCS buckets."
 }
 
 variable "sa_looker_email_map" {
-  type = map(string)
+  type        = map(string)
   description = "List of Service Account emails for Looker buckets."
 }

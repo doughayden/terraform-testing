@@ -10,13 +10,13 @@ resource "google_storage_bucket" "artifact_bucket" {
 # Added to test for SR
 
 resource "google_storage_bucket" "gcs_buckets" {
-  for_each = toset(var.looker_clients)
-  name = "${each.value}-${var.environment}-${var.project}"
-  location = var.region
-  force_destroy = false
-  project = var.project
+  for_each                    = toset(var.looker_clients)
+  name                        = "${each.value}-${var.environment}-${var.project}"
+  location                    = var.region
+  force_destroy               = false
+  project                     = var.project
   uniform_bucket_level_access = true
-  labels = var.labels
+  labels                      = var.labels
   lifecycle_rule {
     condition {
       age = 90

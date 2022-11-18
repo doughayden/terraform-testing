@@ -25,7 +25,7 @@ variable "labels" {
 variable "name_prefix" {
   type        = string
   description = "Name prefix."
-  default    = ""
+  default     = ""
 }
 
 variable "artifact_bucket" {
