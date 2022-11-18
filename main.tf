@@ -29,5 +29,5 @@ module "service-accounts" {
   looker_clients = var.looker_clients
   # gcs_buckets_map     = module.storage.gcs_buckets_out # takes output from the srorage module to pass as a variable to the service-accounts module
   # sa_looker_email_map = module.service-accounts.sa_looker_email_out
-  depends_on = [module.storage]
+  # depends_on = [module.storage]
 }
