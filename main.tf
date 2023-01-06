@@ -31,3 +31,10 @@ module "service-accounts" {
   # sa_looker_email_map = module.service-accounts.sa_looker_email_out
   # depends_on = [module.storage]
 }
+
+module "cloud_run" {
+  source = "./modules/cloud_run"
+  project        = local.project
+  region          = local.region
+  # service_account_test = "cloud-run-svc@lmic-${var.environment}-datahub.iam.gserviceaccount.com"
+}
