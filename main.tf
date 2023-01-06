@@ -5,7 +5,7 @@ module "storage" {
   labels          = local.labels
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
   environment     = var.environment
-  looker_clients  = var.looker_clients
+  looker_clients  = local.looker_clients
   # sa_looker_map   = module.service-accounts.sa_looker_out
   # gcs_buckets_map = module.storage.gcs_buckets_out
 }
