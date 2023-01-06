@@ -14,8 +14,9 @@ variable "environment" {
 }
 
 # Added to test for SR
+# moved to locals to simplify cloud build config
 
-variable "looker_clients" {
-  type        = list(string)
-  description = "new clients for project"
-}
+# variable "looker_clients" {
+#   type        = list(string)
+#   description = "new clients for project"
+# }

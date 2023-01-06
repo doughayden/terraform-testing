@@ -26,15 +26,15 @@ module "service-accounts" {
   source         = "./modules/service-accounts"
   project        = local.project
   environment    = var.environment
-  looker_clients = var.looker_clients
+  looker_clients = local.looker_clients
   # gcs_buckets_map     = module.storage.gcs_buckets_out # takes output from the srorage module to pass as a variable to the service-accounts module
   # sa_looker_email_map = module.service-accounts.sa_looker_email_out
   # depends_on = [module.storage]
 }
 
 module "cloud_run" {
-  source = "./modules/cloud_run"
-  project        = local.project
-  region          = local.region
+  source  = "./modules/cloud_run"
+  project = local.project
+  region  = local.region
   # service_account_test = "cloud-run-svc@lmic-${var.environment}-datahub.iam.gserviceaccount.com"
 }
