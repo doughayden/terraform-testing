@@ -35,5 +35,5 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - terraform plan -lock=false -var 'environment=test' -no-color
+  - terraform plan -lock=false -var 'environment=test' -var project='doug-hayden-eng-sandbox' -no-color
   
