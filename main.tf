@@ -23,7 +23,7 @@ module "cloud_function" {
 # Added to test for SR
 
 module "service_accounts" {
-  source         = "./modules/service-accounts"
+  source         = "./modules/service_accounts"
   project        = local.project
   environment    = var.environment
   looker_clients = local.looker_clients
