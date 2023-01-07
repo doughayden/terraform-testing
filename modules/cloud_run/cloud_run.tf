@@ -33,7 +33,7 @@ resource "docker_image" "test-cloud-run" {
     context = "${path.cwd}/modules/cloud_run/test-cloud-run"
   }
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/*") : filesha1(f)]))
+    dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/") : filesha1(f)]))
   }
 }
 
