@@ -22,7 +22,7 @@ module "cloud_function" {
 
 # Added to test for SR
 
-module "service-accounts" {
+module "service_accounts" {
   source         = "./modules/service-accounts"
   project        = local.project
   environment    = var.environment
