@@ -35,23 +35,23 @@ resource "docker_registry_image" "test-cloud-run" {
   }
 }
 
-provider "docker" {
-  registry_auth {
-    address     = "gcr.io"
-    config_file = pathexpand("${path.cwd}/.docker/config.json")
-  }
-}
+# provider "docker" {
+#   registry_auth {
+#     address     = "gcr.io"
+#     config_file = pathexpand("${path.cwd}/.docker/config.json")
+#   }
+# }
 
 
-resource "docker_config" "service_config" {
-  name = "docker-test-config-${replace(timestamp(), ":", ".")}"
-  data = base64encode(
-    file("${path.cwd}/.docker/config.json"
-    )
-  )
+# resource "docker_config" "service_config" {
+#   name = "docker-test-config-${replace(timestamp(), ":", ".")}"
+#   data = base64encode(
+#     file("${path.cwd}/.docker/config.json"
+#     )
+#   )
 
-  lifecycle {
-    ignore_changes        = [name]
-    create_before_destroy = true
-  }
-}
+#   lifecycle {
+#     ignore_changes        = [name]
+#     create_before_destroy = true
+#   }
+# }
