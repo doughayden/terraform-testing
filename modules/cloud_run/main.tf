@@ -28,14 +28,14 @@ resource "google_cloud_run_service" "test-cloud-run" {
 }
 
 resource "docker_image" "test-cloud-run" {
-    name = "test-cloud-run:1.0"
+    name = "gcr.io/${var.project}/cloudrun/test-cloud-run:1.0"
     build {
         context = "${path.cwd}/modules/cloud_run/test-cloud-run"
     }
 }
 
 resource "docker_registry_image" "test-cloud-run" {
-  name = "gcr.io/${var.project}/cloudrun/${docker_image.test-cloud-run.name}"
+  name = docker_image.test-cloud-run.name
 }
 
 provider "docker" {
