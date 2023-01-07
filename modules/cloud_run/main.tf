@@ -16,7 +16,7 @@ resource "google_cloud_run_service" "test-cloud-run" {
     spec {
       service_account_name = "136454482223-compute@developer.gserviceaccount.com"
       containers {
-        image = "gcr.io/${var.project}/cloudrun/${docker_registry_image.test-cloud-run.name}"
+        image = "${docker_registry_image.test-cloud-run.name}"
       }
     }
   }
