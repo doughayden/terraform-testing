@@ -35,7 +35,7 @@ resource "docker_image" "test-cloud-run" {
 }
 
 resource "docker_registry_image" "test-cloud-run" {
-  name = "gcr.io/${var.project}/cloudrun/${docker_image.name}"
+  name = "gcr.io/${var.project}/cloudrun/${docker_image.test-cloud-run.name}"
 }
 
 provider "docker" {
