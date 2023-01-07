@@ -16,7 +16,7 @@ resource "google_cloud_run_service" "test-cloud-run" {
     spec {
       service_account_name = "136454482223-compute@developer.gserviceaccount.com"
       containers {
-        image = "gcr.io/doug-hayden-eng-sandbox/cloudrun/${docker_registry_image.test-cloud-run.name}"
+        image = docker_registry_image.test-cloud-run.name
       }
     }
   }
@@ -27,12 +27,15 @@ resource "google_cloud_run_service" "test-cloud-run" {
   }
 }
 
-resource "docker_registry_image" "test-cloud-run" {
-  name = "test-cloud-run:1.0"
+resource "docker_image" "test-cloud-run" {
+    name = "gcr.io/${var.project}/cloudrun/test-cloud-run:1.0"
+    build {
+        context = "${path.cwd}/modules/cloud_run/test-cloud-run"
+    }
+}
 
-  build {
-    context = "${path.cwd}/modules/cloud_run/test-cloud-run"
-  }
+resource "docker_registry_image" "test-cloud-run" {
+  name = docker_image.test-cloud-run.name
 }
 
 provider "docker" {
@@ -43,15 +46,15 @@ provider "docker" {
 }
 
 
-resource "docker_config" "service_config" {
-  name = "docker-test-config-${replace(timestamp(), ":", ".")}"
-  data = base64encode(
-    file("${path.cwd}/.docker/config.json"
-    )
-  )
+# resource "docker_config" "service_config" {
+#   name = "docker-test-config-${replace(timestamp(), ":", ".")}"
+#   data = base64encode(
+#     file("${path.cwd}/.docker/config.json"
+#     )
+#   )
 
-  lifecycle {
-    ignore_changes        = [name]
-    create_before_destroy = true
-  }
-}
+#   lifecycle {
+#     ignore_changes        = [name]
+#     create_before_destroy = true
+#   }
+# }
