@@ -15,9 +15,15 @@ variable "region" {
   default     = ""
 }
 
+variable "image_tag" {
+  type        = string
+  description = "Docker image version"
+  default     = "1.0"
+}
+
 # variable "environment" {
 #   type        = string
-#   description = "The project where the data lake resources will be deployed"
+#   description = "The project to deploy resources"
 #   default = "dev"
 #   validation {
 #     condition     = var.environment == "dev" || var.environment == "prod"
