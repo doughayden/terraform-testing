@@ -33,13 +33,13 @@ resource "google_cloud_run_service" "test-cloud-run" {
 }
 
 resource "docker_image" "test-cloud-run" {
-  name = "gcr.io/doug-hayden-eng-sandbox/cloudrun/test-cloud-run:${var.image_tag}"
+  name = "gcr.io/${var.project}/cloudrun/test-cloud-run:${var.image_tag}"
   build {
     context = "${path.cwd}/modules/cloud_run/test-cloud-run"
   }
-  # triggers = {
-  #   dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/") : filesha1(f)]))
-  # }
+  triggers = {
+    dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/") : filesha1(f)]))
+  }
 }
 
 resource "docker_registry_image" "test-cloud-run" {
