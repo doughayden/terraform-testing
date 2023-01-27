@@ -2,7 +2,7 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "3.0.1"
+      version = "2.25.0"
     }
   }
 }
@@ -61,3 +61,9 @@ provider "docker" {
     config_file = pathexpand("${path.cwd}/.docker/config.json")
   }
 }
+
+# ### #
+#
+# test to see if this causes any changes in tf plan
+#
+# ### #
