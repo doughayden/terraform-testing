@@ -1,9 +1,12 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: 
-  - 'build'
-  - '-t'
-  - 'gcr.io/$PROJECT_ID/cloudrun/test-cloud-run:1.0'
-  - '.'
-images:
-- 'gcr.io/$PROJECT_ID/cloudrun/test-cloud-run:1.0'
+- id: 'docker build'
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t',
+        'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run:2.0',
+        'git@github.com:doughayden/terraform-testing.git#main:modules/cloud_run/test-cloud-run/'
+        ]
+- id: 'docker push'
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push',
+        'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run:2.0'
+        ]

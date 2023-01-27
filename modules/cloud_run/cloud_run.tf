@@ -38,12 +38,21 @@ resource "docker_image" "test-cloud-run" {
     context = "${path.cwd}/modules/cloud_run/test-cloud-run"
   }
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/") : filesha1(f)]))
+    dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/*") : filesha1("${path.module}/${f}")]))
   }
+  # lifecycle {
+  #   ignore_changes = [build]
+  # }
 }
+
+# ^^^ Ref: https://stackoverflow.com/questions/51138667/can-terraform-watch-a-directory-for-changes
+# https://developer.hashicorp.com/terraform/language/functions/fileset
 
 resource "docker_registry_image" "test-cloud-run" {
   name = docker_image.test-cloud-run.name
+  triggers = {
+    dir_sha1 = sha1(join("", [for f in fileset(path.module, "test-cloud-run/*") : filesha1("${path.module}/${f}")]))
+  }
 }
 
 provider "docker" {
@@ -52,26 +61,3 @@ provider "docker" {
     config_file = pathexpand("${path.cwd}/.docker/config.json")
   }
 }
-
-
-# resource "docker_config" "service_config" {
-#   name = "docker-test-config-${replace(timestamp(), ":", ".")}"
-#   data = base64encode(
-#     file("${path.cwd}/.docker/config.json"
-#     )
-#   )
-
-#   lifecycle {
-#     ignore_changes        = [name]
-#     create_before_destroy = true
-#   }
-# }
-#
-#
-# ### #
-#
-# testing cloudbuild trigger 
-# test again
-# test again
-#
-# ### #
