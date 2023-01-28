@@ -18,7 +18,7 @@ variable "region" {
 variable "image_tag" {
   type        = string
   description = "Docker image version"
-  default     = "2.3"
+  default     = "2.4"
 }
 
 # variable "environment" {
