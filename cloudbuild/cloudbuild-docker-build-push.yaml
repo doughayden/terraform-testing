@@ -3,12 +3,7 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t',
         'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run:2.0',
-        'modules/cloud_run/test-cloud-run/'
+        '.'
         ]
-  images:
-  -'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run:2.0'
-- id: 'docker push'
-  name: 'gcr.io/cloud-builders/docker'
-  args: ['push',
-        'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run:2.0'
-        ]
+  dir: 'modules/cloud_run/test-cloud-run/'
+images: ['gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run:2.0']
