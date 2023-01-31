@@ -4,11 +4,14 @@ steps:
   args: 
     - build
     - '-t'
-    - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:${SHORT_SHA}'
-    - 't'
+    - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:$SHORT_SHA'
+    - '-t'
     - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:latest'
+    - '-t'
+    - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:$TAG_NAME'
     - . 
   dir: 'src/cloud-run/test-cloud-run-1/'
 images:
-  - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:${SHORT_SHA}'
+  - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:$SHORT_SHA'
   - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:latest'
+  - 'gcr.io/${PROJECT_ID}/cloudrun/test-cloud-run-1:$TAG_NAME'
