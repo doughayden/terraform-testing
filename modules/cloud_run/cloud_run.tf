@@ -9,7 +9,7 @@
 
 # Make these test services public to allUsers
 
-data "google_iam_policy" "noauth" {
+data "google_iam_policy" "noauth-0" {
   binding {
     role = "roles/run.invoker"
     members = [
@@ -18,20 +18,29 @@ data "google_iam_policy" "noauth" {
   }
 }
 
-resource "google_cloud_run_service_iam_policy" "noauth" {
+data "google_iam_policy" "noauth-1" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "allUsers",
+    ]
+  }
+}
+
+resource "google_cloud_run_service_iam_policy" "noauth-0" {
   location    = google_cloud_run_service.test-cloud-run-0.location
   project     = google_cloud_run_service.test-cloud-run-0.project
   service     = google_cloud_run_service.test-cloud-run-0.name
 
-  policy_data = data.google_iam_policy.noauth.policy_data
+  policy_data = data.google_iam_policy.noauth-0.policy_data
 }
 
-resource "google_cloud_run_service_iam_policy" "noauth" {
+resource "google_cloud_run_service_iam_policy" "noauth-1" {
   location    = google_cloud_run_service.test-cloud-run-1.location
   project     = google_cloud_run_service.test-cloud-run-1.project
   service     = google_cloud_run_service.test-cloud-run-1.name
 
-  policy_data = data.google_iam_policy.noauth.policy_data
+  policy_data = data.google_iam_policy.noauth-1.policy_data
 }
 
 resource "google_cloud_run_service" "test-cloud-run-0" {
