@@ -2,14 +2,14 @@ steps:
 - id: 'docker build'
   name: 'gcr.io/cloud-builders/docker'
   args: 
-    - build
+    - 'build'
     - '-t'
     - 'gcr.io/$PROJECT_ID/cloudrun/test-cloud-run-0:$SHORT_SHA'
     - '-t'
     - 'gcr.io/$PROJECT_ID/cloudrun/test-cloud-run-0:latest'
     - '-t'
     - 'gcr.io/$PROJECT_ID/cloudrun/test-cloud-run-0:$TAG_NAME'
-    - .  
+    - '.' 
   dir: 'src/cloud-run/test-cloud-run-0/'
 images:
   - 'gcr.io/$PROJECT_ID/cloudrun/test-cloud-run-0:$SHORT_SHA'
