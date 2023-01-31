@@ -16,7 +16,7 @@ resource "google_cloud_run_service" "test-cloud-run-0" {
     spec {
       service_account_name = "136454482223-compute@developer.gserviceaccount.com"
       containers {
-        image = "gcr.io/${var.project}/cloudrun/test-cloud-run-0"
+        image = "gcr.io/${var.project}/cloudrun/test-cloud-run-0:latest"
 
         env {
           name  = "PROJECT_ID"
@@ -41,7 +41,7 @@ resource "google_cloud_run_service" "test-cloud-run-1" {
     spec {
       service_account_name = "136454482223-compute@developer.gserviceaccount.com"
       containers {
-        image = "gcr.io/${var.project}/cloudrun/test-cloud-run-1"
+        image = "gcr.io/${var.project}/cloudrun/test-cloud-run-1:latest"
 
         env {
           name  = "PROJECT_ID"

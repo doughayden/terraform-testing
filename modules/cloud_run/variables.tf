@@ -15,11 +15,17 @@ variable "region" {
   default     = ""
 }
 
-variable "image_tag" {
-  type        = string
-  description = "Docker image version"
-  default     = "2.4"
-}
+# variable "image_0_tag" {
+#   type        = string
+#   description = "Docker image version"
+#   default     = "2.5"
+# }
+
+# variable "image_1_tag" {
+#   type        = string
+#   description = "Docker image version"
+#   default     = "0.1"
+# }
 
 # variable "environment" {
 #   type        = string
