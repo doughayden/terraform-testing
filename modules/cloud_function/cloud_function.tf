@@ -60,8 +60,25 @@ resource "google_cloudfunctions_function" "test2" {
   trigger_http          = true
 }
 
-###
-#
-# Here's some added comments to test if this breaks existing resources.
-#
-###
+# Test 3 cloud function - will pull from a Google Cloud Source Repo that mirrors a github repo
+
+locals {
+  cf_repo_name = "github_doughayden_cloud-function-source-test"
+}
+
+resource "google_cloudfunctions_function" "test3" {
+  name        = "test3"
+  description = "Cloud function test3"
+  runtime     = "python39"
+  labels      = var.labels
+  region      = var.region
+  project     = var.project
+
+  available_memory_mb = 256
+  source_repository {
+    url = "https://source.developers.google.com/projects/${var.project}/repos/${local.cf_repo_name}/moveable-aliases/main/paths/"
+  }
+  timeout      = 60
+  entry_point  = "main"
+  trigger_http = true
+}
