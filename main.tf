@@ -38,3 +38,10 @@ module "cloud_run" {
   region  = local.region
   # service_account_test = "cloud-run-svc@lmic-${var.environment}-datahub.iam.gserviceaccount.com"
 }
+
+module "big_query" {
+  source  = "./modules/big_query"
+  project = local.project
+  region  = local.region
+  # service_account_test = "cloud-run-svc@lmic-${var.environment}-datahub.iam.gserviceaccount.com"
+}

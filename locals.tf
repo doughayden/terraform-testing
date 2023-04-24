@@ -3,7 +3,7 @@ locals {
   region  = "us-central1"
   zone    = "us-central1-a"
   labels = {
-    "environment"          = var.environment
+    "environment"          = "${var.environment}"
     "managed-by-terraform" = "true"
     "state"                = "active"
   }
