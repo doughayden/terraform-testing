@@ -1,14 +1,7 @@
-module "storage" {
-  source                   = "./modules/storage"
-  project                  = var.project
-  region                   = local.region
-  labels                   = local.labels
-  artifact_bucket          = "${local.project}-${local.bucket_prefix}-artifact"
-  secret_token_bucket_name = "secret-token-${module.secrets.test_secret_token_value}"
-  environment              = var.environment
-  looker_clients           = local.looker_clients
-  # sa_looker_map   = module.service-accounts.sa_looker_out
-  # gcs_buckets_map = module.storage.gcs_buckets_out
+module "big_query" {
+  source  = "./modules/big_query"
+  project = local.project
+  region  = local.region
 }
 
 module "cloud_function" {
@@ -20,7 +13,16 @@ module "cloud_function" {
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
 }
 
-# Added to test for SR
+module "cloud_run" {
+  source  = "./modules/cloud_run"
+  project = local.project
+  region  = local.region
+}
+
+module "secrets" {
+  source  = "./modules/secrets"
+  project = local.project
+}
 
 module "service_accounts" {
   source         = "./modules/service_accounts"
@@ -32,19 +34,15 @@ module "service_accounts" {
   # depends_on = [module.storage]
 }
 
-module "cloud_run" {
-  source  = "./modules/cloud_run"
-  project = local.project
-  region  = local.region
-}
-
-module "big_query" {
-  source  = "./modules/big_query"
-  project = local.project
-  region  = local.region
-}
-
-module "secrets" {
-  source  = "./modules/secrets"
-  project = local.project
+module "storage" {
+  source                   = "./modules/storage"
+  project                  = var.project
+  region                   = local.region
+  labels                   = local.labels
+  artifact_bucket          = "${local.project}-${local.bucket_prefix}-artifact"
+  secret_token_bucket_name = "secret-token-${module.secrets.test_secret_token_value}"
+  environment              = var.environment
+  looker_clients           = local.looker_clients
+  # sa_looker_map   = module.service-accounts.sa_looker_out
+  # gcs_buckets_map = module.storage.gcs_buckets_out
 }
