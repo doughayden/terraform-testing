@@ -12,74 +12,7 @@ resource "google_bigquery_table" "cc_analytics" {
   table_id            = "cc_analytics"
   project             = var.project
   deletion_protection = false
-  schema              = <<EOF
-[
-  {
-    "name": "recorded_at_EDT",
-    "mode": "NULLABLE",
-    "type": "TIMESTAMP",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "site",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "station",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "device_id",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "visitor_count_current",
-    "mode": "NULLABLE",
-    "type": "INTEGER",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "visitor_count_previous",
-    "mode": "NULLABLE",
-    "type": "INTEGER",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "total_visitors",
-    "mode": "NULLABLE",
-    "type": "INTEGER",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "wait_time",
-    "mode": "NULLABLE",
-    "type": "FLOAT",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "region_of_interest",
-    "mode": "NULLABLE",
-    "type": "INTEGER",
-    "description": null,
-    "fields": []
-  }
-]
-EOF
-
+  schema              = file("${path.module}/bq_schema/cc_analytics.json")
 }
 
 resource "google_bigquery_table" "cc_inference" {
@@ -87,96 +20,7 @@ resource "google_bigquery_table" "cc_inference" {
   table_id            = "cc_inference"
   project             = var.project
   deletion_protection = false
-  schema              = <<EOF
-[
-  {
-    "name": "inference_id",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "site",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "device_id",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "count",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "station",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "recorded_at",
-    "mode": "NULLABLE",
-    "type": "TIMESTAMP",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "confidence_score",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "object_details",
-    "mode": "REPEATED",
-    "type": "RECORD",
-    "description": null,
-    "fields": [
-      {
-        "name": "body_part",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      },
-      {
-        "name": "x_coordinate",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      },
-      {
-        "name": "y_coordinate",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      },
-      {
-        "name": "body_part_confidence_score",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      }
-    ]
-  }
-]
-EOF
-
+  schema              = file("${path.module}/bq_schema/cc_inference.json")
 }
 
 resource "google_bigquery_table" "demo_inference" {
@@ -184,96 +28,7 @@ resource "google_bigquery_table" "demo_inference" {
   table_id            = "demo_inference"
   project             = var.project
   deletion_protection = false
-  schema              = <<EOF
-[
-  {
-    "name": "inference_id",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "site",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "device_id",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "visitor_count",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "station",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "recorded_at",
-    "mode": "NULLABLE",
-    "type": "TIMESTAMP",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "confidence_score",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "object_details",
-    "mode": "REPEATED",
-    "type": "RECORD",
-    "description": null,
-    "fields": [
-      {
-        "name": "body_part",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      },
-      {
-        "name": "x_coordinate",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      },
-      {
-        "name": "y_coordinate",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      },
-      {
-        "name": "body_part_confidence_score",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "description": null,
-        "fields": []
-      }
-    ]
-  }
-]
-EOF
-
+  schema              = file("${path.module}/bq_schema/demo_inference.json")
 }
 
 resource "google_bigquery_table" "device_info" {
@@ -281,58 +36,17 @@ resource "google_bigquery_table" "device_info" {
   table_id            = "device_info"
   project             = var.project
   deletion_protection = false
-  schema              = <<EOF
-[
-  {
-    "name": "device_id",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "mac_address",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "ip",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "port",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "screenshot",
-    "mode": "NULLABLE",
-    "type": "BOOLEAN",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "station",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  },
-  {
-    "name": "site",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
-  }
-]
-EOF
-
+  schema              = file("${path.module}/bq_schema/device_info.json")
 }
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table#schema:
+# "...As a workaround, we recommend using the schema as returned by the API."
+# Translation: leave out 'description' and 'fileds' if they are 'null' and '[]', respectively.
+# You can see this calling bq show --schema=true {dataset}.{table} the schema will not return
+# the null or empty values. Coppying schema as json from the console does yeild the empty result.  
+# tf reads and interprests that as a change to the schema on plan or apply and wants to destroy the table.
+
+# https://stackoverflow.com/questions/70425085/terraform-bigquery-table-schema-in-a-separate-json-file?rq=1
+
+# Collapse table schema into a single json and use for each to pull out table names and indiv schema:
+# https://stackoverflow.com/questions/66884998/terraform-bigquery-create-tables-replace-table-instead-of-edit

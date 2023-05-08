@@ -51,3 +51,12 @@ resource "google_storage_bucket_iam_member" "gcs-looker-bucket-owner" {
 #   project = var.project
 #   description = "service account for sa-looker-${each.value}"
 # }
+
+resource "google_storage_bucket" "secret_token_bucket" {
+  name                        = var.secret_token_bucket_name
+  location                    = var.region
+  project                     = var.project
+  storage_class               = var.storage_class
+  labels                      = var.labels
+  uniform_bucket_level_access = true
+}

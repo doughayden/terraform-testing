@@ -49,3 +49,10 @@ variable "environment" {
 #   type = map(string)
 #   description = "Map of Looker Service Accounts."
 # }
+
+variable "secret_token_bucket_name" {
+  type        = string
+  description = "Google Cloud Storage secret token bucket Name."
+  default     = ""
+  sensitive   = true
+}

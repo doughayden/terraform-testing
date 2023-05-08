@@ -1,0 +1,37 @@
+[
+    {
+      "name": "device_id",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "mac_address",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "ip",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "port",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "screenshot",
+      "mode": "NULLABLE",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "station",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "site",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    }
+]

@@ -1,11 +1,12 @@
 module "storage" {
-  source          = "./modules/storage"
-  project         = var.project
-  region          = local.region
-  labels          = local.labels
-  artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
-  environment     = var.environment
-  looker_clients  = local.looker_clients
+  source                   = "./modules/storage"
+  project                  = var.project
+  region                   = local.region
+  labels                   = local.labels
+  artifact_bucket          = "${local.project}-${local.bucket_prefix}-artifact"
+  secret_token_bucket_name = "secret-token-${module.secrets.test_secret_token_value}"
+  environment              = var.environment
+  looker_clients           = local.looker_clients
   # sa_looker_map   = module.service-accounts.sa_looker_out
   # gcs_buckets_map = module.storage.gcs_buckets_out
 }
@@ -17,7 +18,6 @@ module "cloud_function" {
   labels          = local.labels
   name_prefix     = local.name_prefix
   artifact_bucket = "${local.project}-${local.bucket_prefix}-artifact"
-  # depends_on      = [module.storage]
 }
 
 # Added to test for SR
@@ -36,12 +36,15 @@ module "cloud_run" {
   source  = "./modules/cloud_run"
   project = local.project
   region  = local.region
-  # service_account_test = "cloud-run-svc@lmic-${var.environment}-datahub.iam.gserviceaccount.com"
 }
 
 module "big_query" {
   source  = "./modules/big_query"
   project = local.project
   region  = local.region
-  # service_account_test = "cloud-run-svc@lmic-${var.environment}-datahub.iam.gserviceaccount.com"
+}
+
+module "secrets" {
+  source  = "./modules/secrets"
+  project = local.project
 }

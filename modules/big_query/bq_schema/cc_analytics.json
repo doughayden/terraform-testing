@@ -1,0 +1,47 @@
+[
+    {
+      "name": "recorded_at_EDT",
+      "mode": "NULLABLE",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "site",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "station",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "device_id",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "visitor_count_current",
+      "mode": "NULLABLE",
+      "type": "INTEGER"
+    },
+    {
+      "name": "visitor_count_previous",
+      "mode": "NULLABLE",
+      "type": "INTEGER"
+    },
+    {
+      "name": "total_visitors",
+      "mode": "NULLABLE",
+      "type": "INTEGER"
+    },
+    {
+      "name": "wait_time",
+      "mode": "NULLABLE",
+      "type": "FLOAT"
+    },
+    {
+      "name": "region_of_interest",
+      "mode": "NULLABLE",
+      "type": "INTEGER"
+    }
+]

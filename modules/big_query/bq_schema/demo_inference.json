@@ -1,0 +1,64 @@
+[
+    {
+      "name": "inference_id",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "site",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "device_id",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "visitor_count",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "station",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "recorded_at",
+      "mode": "NULLABLE",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "confidence_score",
+      "mode": "NULLABLE",
+      "type": "STRING"
+    },
+    {
+      "name": "object_details",
+      "mode": "REPEATED",
+      "type": "RECORD",
+      "fields": [
+        {
+          "name": "body_part",
+          "mode": "NULLABLE",
+          "type": "STRING"
+        },
+        {
+          "name": "x_coordinate",
+          "mode": "NULLABLE",
+          "type": "STRING"
+        },
+        {
+          "name": "y_coordinate",
+          "mode": "NULLABLE",
+          "type": "STRING"
+        },
+        {
+          "name": "body_part_confidence_score",
+          "mode": "NULLABLE",
+          "type": "STRING"
+        }
+      ]
+    }
+]
